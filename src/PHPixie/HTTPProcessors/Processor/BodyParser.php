@@ -4,24 +4,32 @@ namespace PHPixie\HTTPProcessors\Processor;
 
 class BodyParser implements \PHPixie\Processors\Processor
 {
+    protected $http;
     protected $parsers;
     
-    public function __construct($parsers)
+    public function __construct($http, $parsers)
     {
+        $this->http    = $http;
         $this->parsers = $parsers;
     }
     
-    protected function parseServerRequest()
+    public function process($configData, $request)
     {
+        $serverRequest = $request->serverRequest();
+        
         $contentType = $serverRequest->getHeaderLine('Content-Type');
-        $parser = $parsers->getForType($contentType);
+        $contentType = strtolower($contentType);
+        
+        $parser = $this->parsers->getForContentType($contentType);
+        
         if($parser !== null) {
             $body = (string) $serverRequest->getBody();
             $parsed = $parser->parse($body);
             $serverRequest = $serverRequest->withParsedBody($parsed);
+            $request = $this->http->request($serverRequest);
         }
         
-        return $serverRequest;
+        return $request;
     }
     
     public function name()
