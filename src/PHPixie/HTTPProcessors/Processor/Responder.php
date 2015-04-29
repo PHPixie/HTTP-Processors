@@ -11,27 +11,30 @@ class Responder implements \PHPixie\Processors\Processor
         $this->responses = $responses;
     }
     
-    public function process($configData, $request)
+    public function process($value, $f = null)
     {
-        $response = $this->processRequest($configData, $request);
-        return $this->normalizeResponse($configData, $response);
+        if($value instanceof \PHPixie\HTTP\Responses\Response) {
+            return $value;
+        }
+        
+        if($value instanceof \Psr\Http\Message\ResponseInterface) {
+            return $value;
+        }
+        
+        if(is_string($value)) {
+            return $this->responses->string($value);
+        }
+        
+        if(is_object($value) || is_array($value)) {
+            return $this->responses->json($value);
+        }
+        
+        $type = gettype($value);
+        throw new \PHPixie\HTTPProcessors\Exception("Cannot convert type '$type' into a response");
     }
     
-    protected function normalizeResponse($configData, $response)
+    public function name()
     {
-        if($response instanceof \PHPixie\HTTP\Responses\Response) {
-            return $response;
-        }
-        
-        if(is_scalar($response)) {
-            return $this->responses->string($response);
-        }
-        
-        if(is_object($response) || is_array($response)) {
-            return $this->responses->json($response);
-        }
-        
-        $type = get_type($response);
-        throw new \PHPixie\HTTPProcessors\Exception("Cannot convert type '$type' into a response");
+        return 'responder';
     }
 }

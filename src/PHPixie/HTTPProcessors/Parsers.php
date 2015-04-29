@@ -4,17 +4,39 @@ namespace PHPixie\HTTPProcessors;
 
 class Parsers
 {
-    protected $map = array(
+    protected $contentTypeMap = array(
         'application/json' => 'json'
     );
     
+    protected $parsers = array();
+    
     public function getForContentType($contentType)
     {
-        if(!array_key_exists($contentType, $this->map)) {
+        if(!array_key_exists($contentType, $this->contentTypeMap)) {
             return null;
         }
         
-        $name = $this->map[$contentType];
-        return $this->get($name);
+        $name = $this->contentTypeMap[$contentType];
+        return $this->parser($name);
+    }
+    
+    public function json()
+    {
+        return $this->parser('json');
+    }
+    
+    protected function parser($name)
+    {
+        if(!array_key_exists($name, $this->parsers)) {
+            $method = 'build'.ucfirst($name);
+            $this->parsers[$name] = $this->$method();
+        }
+        
+        return $this->parsers[$name];
+    }
+    
+    protected function buildJson()
+    {
+        return new Parsers\Parser\JSON();
     }
 }
