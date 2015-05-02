@@ -23,16 +23,18 @@ class PatternTest extends \PHPixie\Test\Testcase
         $sets = array(
             array(
                 array(
-                    'pattern'    => '/<pixie>/<trixie>',
+                    'pattern'    => '(<pixie>(/<trixie>))',
                     'defaults'  => array(
                         'pixie' => 'fairy'
                     ),
                     'attributes' => array(
                         'pixie' => '[0-9]+'
-                    )
+                    ),
+                    'methods' => array('GET')
                 ),
                 array(
-                    'regexp'    => '/(?P<pixie>[0-9]+)/(?P<trixie>[^/]+)',
+                    'regexp'    => '(?:([0-9]+)(?:/([^/]+))?)?',
+                    'parameterNames' => array('pixie', 'trixie'),
                 )
             )
         );
@@ -41,11 +43,30 @@ class PatternTest extends \PHPixie\Test\Testcase
             $pattern = $this->pattern('pixie', $config);
             
             $this->assertSame('pixie', $pattern->name());
-            $this->assertSame($set[0]['pattern'], $pattern->pattern());
-            $this->assertSame($set[0]['defaults'], $pattern->defaults());
-            
-            $this->assertSame($set[1]['regexp'], $pattern->regexp());
+            $methods = array_merge($set[0], $set[1]);
+            unset($methods['attributes']);
+            foreach($methods as $method => $value) {
+                $this->assertSame($value, $pattern->$method());
+            }
         }
+    }
+    
+    protected function sliceData($data)
+    {
+        $slice = $this->quickMock('\PHPixie\Slice\Data');
+        
+        $this->method($slice, 'getRequired', $data['pattern'], array('pattern'), 0);
+        
+        $params = array(
+            'defaults',
+            'methods',
+            'pattern'
+        );
+        foreach($params as $key => $name) {
+            $this->method($slice, 'get', $data[$name], array($name, array()), $key+1);
+        }
+        
+        return $slice;
     }
     
     public function pattern($name, $config)
