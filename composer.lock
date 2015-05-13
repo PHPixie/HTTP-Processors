@@ -64,16 +64,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPixie/Processors.git",
-                "reference": "334f4936fe86b8821ab6aa9cf77950fc530c1000"
+                "reference": "31a9cc3d75125984f1b5b9c08eb34f3b4ec01896"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPixie/Processors/zipball/334f4936fe86b8821ab6aa9cf77950fc530c1000",
-                "reference": "334f4936fe86b8821ab6aa9cf77950fc530c1000",
+                "url": "https://api.github.com/repos/PHPixie/Processors/zipball/31a9cc3d75125984f1b5b9c08eb34f3b4ec01896",
+                "reference": "31a9cc3d75125984f1b5b9c08eb34f3b4ec01896",
                 "shasum": ""
-            },
-            "require": {
-                "phpixie/slice": "3.*@dev"
             },
             "require-dev": {
                 "phpixie/test": "3.*@dev"
@@ -106,7 +103,7 @@
             "keywords": [
                 "processors"
             ],
-            "time": "2015-04-28 12:17:37"
+            "time": "2015-05-03 16:25:11"
         },
         {
             "name": "phpixie/slice",
@@ -163,13 +160,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/http-message.git",
-                "reference": "9723465b3e7c8ecb0436f066bfb8a13e1bac1789"
+                "reference": "85d63699f0dbedb190bbd4b0d2b9dc707ea4c298"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/http-message/zipball/9723465b3e7c8ecb0436f066bfb8a13e1bac1789",
-                "reference": "9723465b3e7c8ecb0436f066bfb8a13e1bac1789",
+                "url": "https://api.github.com/repos/php-fig/http-message/zipball/85d63699f0dbedb190bbd4b0d2b9dc707ea4c298",
+                "reference": "85d63699f0dbedb190bbd4b0d2b9dc707ea4c298",
                 "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
             },
             "type": "library",
             "extra": {
@@ -179,7 +179,7 @@
             },
             "autoload": {
                 "psr-4": {
-                    "Psr\\Http\\Message\\": "src"
+                    "Psr\\Http\\Message\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -201,7 +201,7 @@
                 "request",
                 "response"
             ],
-            "time": "2015-04-13 14:20:01"
+            "time": "2015-05-04 20:22:00"
         }
     ],
     "packages-dev": [
