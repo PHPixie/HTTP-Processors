@@ -3,20 +3,17 @@
 namespace PHPixie\Tests\HTTPProcessors\Processor;
 
 /**
- * @coversDefaultClass \PHPixie\HTTPProcessors\Processor\BodyParser
+ * @coversDefaultClass \PHPixie\HTTPProcessors\Processor\ParseBody
  */
-class BodyParserTest extends \PHPixie\Test\Testcase
+class ParseBodyTest extends \PHPixie\Test\Testcase
 {
-    protected $http;
     protected $parsers;
-    protected $bodyParser;
+    protected $parseBody;
     
     public function setUp()
     {
-        $this->http = $this->quickMock('\PHPixie\HTTP');
         $this->parsers = $this->quickMock('\PHPixie\HTTPProcessors\Parsers');
-        $this->bodyParser = new \PHPixie\HTTPProcessors\Processor\BodyParser(
-            $this->http,
+        $this->parseBody = new \PHPixie\HTTPProcessors\Processor\ParseBody(
             $this->parsers
         );
     }
@@ -42,11 +39,7 @@ class BodyParserTest extends \PHPixie\Test\Testcase
     
     protected function processTest($isParsed = false)
     {
-        $configData = $this->quickMock('\PHPixie\Slice\Data');
-        $request = $this->quickMock('\PHPixie\HTTP\Request');
-        
         $serverRequest = $this->quickMock('\Psr\Http\Message\ServerRequestInterface');
-        $this->method($request, 'serverRequest',$serverRequest, array(), 0);
         
         $contentType = 'applciation/JSON';
         $this->method($serverRequest, 'getHeaderLine', $contentType, array('Content-Type'), 0);
@@ -66,30 +59,13 @@ class BodyParserTest extends \PHPixie\Test\Testcase
             $this->method($body, '__toString', 'test', array(), 0);
             $this->method($parser, 'parse', $data, array('test'), 0);
             
-            $newServerRequest = $this->quickMock('\Psr\Http\Message\ServerRequestInterface');
-            $this->method($serverRequest, 'withParsedBody', $newServerRequest, array($data), 2);
-            
-            $expected = $this->quickMock('\PHPixie\HTTP\Request');
-            $this->method($this->http, 'request', $expected, array($newServerRequest), 0);
+            $expected = $this->quickMock('\Psr\Http\Message\ServerRequestInterface');
+            $this->method($serverRequest, 'withParsedBody', $expected, array($data), 2);
             
         }else{
-            $expected = $request;
+            $expected = $serverRequest;
         }
         
-        $this->assertSame($expected, $this->bodyParser->process($configData, $request));
-    }
-    
-    /**
-     * @covers ::name
-     * @covers ::<protected>
-     */
-    public function testName()
-    {
-        $this->assertSame('bodyParser', $this->bodyParser->name());
-    }
-    
-    protected function getSliceData()
-    {
-        return $this->quickMock('\PHPixie\Slice\Data');
+        $this->assertSame($expected, $this->parseBody->process($serverRequest));
     }
 }

@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "07ff345e41b050ddf7f1be7d7aff6d1e",
+    "hash": "579bcd2132aaf37e6b1aa480f346f500",
     "packages": [
         {
             "name": "phpixie/http",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPixie/HTTP.git",
-                "reference": "f5db5a4c10be654c395550812e8dbecc341efd32"
+                "reference": "a1eef970e0f6a6f5442eada5bd57749a260a5b26"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPixie/HTTP/zipball/f5db5a4c10be654c395550812e8dbecc341efd32",
-                "reference": "f5db5a4c10be654c395550812e8dbecc341efd32",
+                "url": "https://api.github.com/repos/PHPixie/HTTP/zipball/a1eef970e0f6a6f5442eada5bd57749a260a5b26",
+                "reference": "a1eef970e0f6a6f5442eada5bd57749a260a5b26",
                 "shasum": ""
             },
             "require": {
@@ -56,7 +56,7 @@
                 "http",
                 "psr-7"
             ],
-            "time": "2015-04-26 13:42:33"
+            "time": "2015-06-17 12:43:59"
         },
         {
             "name": "phpixie/processors",
@@ -64,12 +64,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPixie/Processors.git",
-                "reference": "31a9cc3d75125984f1b5b9c08eb34f3b4ec01896"
+                "reference": "df40bca7a1e6f8d33ccd0369eec0b9d77a0c889a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPixie/Processors/zipball/31a9cc3d75125984f1b5b9c08eb34f3b4ec01896",
-                "reference": "31a9cc3d75125984f1b5b9c08eb34f3b4ec01896",
+                "url": "https://api.github.com/repos/PHPixie/Processors/zipball/df40bca7a1e6f8d33ccd0369eec0b9d77a0c889a",
+                "reference": "df40bca7a1e6f8d33ccd0369eec0b9d77a0c889a",
                 "shasum": ""
             },
             "require-dev": {
@@ -101,9 +101,10 @@
             "description": "Processors library for PHPixie",
             "homepage": "http://phpixie.com",
             "keywords": [
+                "Chain",
                 "processors"
             ],
-            "time": "2015-05-03 16:25:11"
+            "time": "2015-05-06 00:59:49"
         },
         {
             "name": "phpixie/slice",
