@@ -68,6 +68,21 @@ class BuilderTest extends \PHPixie\Test\Testcase
     }
     
     /**
+     * @covers ::attributeRegistryDispatcher
+     * @covers ::<protected>
+     */
+    public function testAttributeRegistryDispatcher()
+    {
+        $registry = $this->quickMock('\PHPixie\Processors\Registry');
+        
+        $processor = $this->builder->attributeRegistryDispatcher($registry, 'pixie');
+        $this->assertInstance($processor, '\PHPixie\HTTPPRocessors\Processor\Dispatcher\Registry\Attribute', array(
+            'registry'      => $registry,
+            'attributeName' => 'pixie'
+        ));
+    }
+    
+    /**
      * @covers ::parsers
      * @covers ::<protected>
      */

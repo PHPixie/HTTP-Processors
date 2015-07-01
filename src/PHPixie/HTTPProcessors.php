@@ -26,6 +26,14 @@ class HTTPProcessors
         return $this->builder->parseBodyProcessor();
     }
     
+    public function attributeRegistryDispatcher($processorRegistry, $attributeName)
+    {
+        return $this->builder->attributeRegistryDispatcher(
+            $processorRegistry,
+            $attributeName
+        );
+    }
+    
     public function builder()
     {
         return $this->builder;

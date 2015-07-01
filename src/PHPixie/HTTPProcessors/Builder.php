@@ -34,6 +34,14 @@ class Builder
         );
     }
     
+    public function attributeRegistryDispatcher($processorRegistry, $attributeName)
+    {
+        return new Processor\Dispatcher\Registry\Attribute(
+            $processorRegistry,
+            $attributeName
+        );
+    }
+    
     public function parsers()
     {
         if($this->parsers === null) {

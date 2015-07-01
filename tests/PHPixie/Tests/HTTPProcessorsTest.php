@@ -66,6 +66,19 @@ class HTTPProcessorsTest extends \PHPixie\Test\Testcase
     }
     
     /**
+     * @covers ::attributeRegistryDispatcher
+     * @covers ::<protected>
+     */
+    public function testParameterRegistryDispatcher()
+    {
+        $registry = $this->quickMock('\PHPixie\Processors\Registry');
+        
+        $processor = $this->quickMock('\PHPixie\HTTPPRocessors\Processor\Dispatcher\Registry\Parameter');
+        $this->method($this->builder, 'attributeRegistryDispatcher', $processor, array($registry, 'pixie'), 0);
+        $this->assertSame($processor, $this->httpProcessors->attributeRegistryDispatcher($registry, 'pixie'));
+    }
+    
+    /**
      * @covers ::parseBody
      * @covers ::<protected>
      */
