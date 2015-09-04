@@ -13,10 +13,10 @@ class UpdateContext implements \PHPixie\Processors\Processor
         $this->settableContextContainer = $settableContextContainer;
     }
     
-    public function process($serverRequest)
+    public function process($request)
     {
-        $context = $this->http->serverRequestContext($serverRequest);
+        $context = $this->http->context($request);
         $this->settableContextContainer->setHttpContext($context);
-        return $serverRequest;
+        return $request;
     }
 }
