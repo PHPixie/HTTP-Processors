@@ -12,6 +12,9 @@ class Parsers
     
     public function getForContentType($contentType)
     {
+        $contentType = explode(';', $contentType, 2);
+        $contentType = $contentType[0];
+        
         if(!array_key_exists($contentType, $this->contentTypeMap)) {
             return null;
         }
